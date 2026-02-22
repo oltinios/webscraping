@@ -9,8 +9,7 @@ html = HTMLParser(resp.text)
 
 # print(html.css_first("title").text())
 
-products = html.css("div.mb-3xl ul li") # "mb-3xl" is the results for B&Q site
-print(products)
+products = html.css('li[class="max-md:border-b-size-sm max-md:border-color-default"]') # need to wrap it up because most parsers cant handle colons in the class names
 i = 0
 j = 0
 
@@ -18,4 +17,7 @@ while i < len(products):
     j += 1
     i += 1
 
-print(j)
+for product in products:
+    print(product.css_first(".mb-xs.font-bold").text())
+
+print(j, "Products")
