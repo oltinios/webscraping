@@ -17,7 +17,21 @@ while i < len(products):
     j += 1
     i += 1
 
+def extract_text(html, sel):
+    try:
+        return html.css_first(sel).text()
+    except AttributeError:
+        return None
+        
+
 for product in products:
-    print(product.css_first(".mb-xs.font-bold").text())
+    item = {
+        "name": extract_text(product, ".mb-xs.font-bold"),
+        "price": extract_text(product, "span[data-testid=product-price]"),
+        "offers": extract_text(product, "span[data-testid=roundel]")
+    }
+    # print(product.css_first(".mb-xs.font-bold").text())
+
+    print(item)
 
 print(j, "Products")
